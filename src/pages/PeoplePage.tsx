@@ -9,7 +9,7 @@ export const PeoplePage = () => {
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const allPeople = !isError && !isLoading && !!people.length;
+  const isTableVisible = !isError && !isLoading && !!people.length;
 
   useEffect(() => {
     getPeople()
@@ -20,23 +20,25 @@ export const PeoplePage = () => {
       });
   }, []);
 
+  const loaderContent = isLoading && <Loader />;
+  const errorContent = isError && !isLoading && (
+    <p data-cy="peopleLoadingError" className="has-text-danger">
+      Something went wrong
+    </p>
+  );
+  const noPeopleContent = !people.length && !isLoading && (
+    <p data-cy="noPeopleMessage">There are no people on the server</p>
+  );
+
   return (
     <>
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {isLoading && <Loader />}
-
-          {isError && !isLoading && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
-          )}
-          {!people.length && !isLoading && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          )}
-
-          {allPeople && <PeopleTable people={people} />}
+          {loaderContent}
+          {errorContent}
+          {noPeopleContent}
+          {isTableVisible && <PeopleTable people={people} />}
         </div>
       </div>
     </>
