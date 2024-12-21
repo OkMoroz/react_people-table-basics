@@ -38,37 +38,15 @@ export const PeopleTable: React.FC<Props> = props => {
       </thead>
 
       <tbody>
-        {preparedPeople.map(
-          ({
-            slug,
-            name,
-            sex,
-            born,
-            died,
-            mother,
-            motherName,
-            father,
-            fatherName,
-          }) => {
-            return (
-              <PersonTableRow
-                key={slug}
-                person={{
-                  slug,
-                  name,
-                  sex,
-                  born,
-                  died,
-                  mother,
-                  father,
-                  motherName,
-                  fatherName,
-                }}
-                currentSlug={currentSlug || ''}
-              />
-            );
-          },
-        )}
+        {preparedPeople.map(person => {
+          return (
+            <PersonTableRow
+              key={person.slug}
+              person={person}
+              currentSlug={currentSlug || ''}
+            />
+          );
+        })}
       </tbody>
     </table>
   );

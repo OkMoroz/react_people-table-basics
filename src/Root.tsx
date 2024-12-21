@@ -7,7 +7,7 @@ import {
 import { App } from './App';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
-import NotFoundPage from './pages/NotFoundPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const Root = () => (
   <Router>
