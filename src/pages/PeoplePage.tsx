@@ -20,24 +20,23 @@ export const PeoplePage = () => {
       });
   }, []);
 
-  const loaderContent = isLoading && <Loader />;
-  const errorContent = isError && !isLoading && (
-    <p data-cy="peopleLoadingError" className="has-text-danger">
-      Something went wrong
-    </p>
-  );
-  const noPeopleContent = !people.length && !isLoading && (
-    <p data-cy="noPeopleMessage">There are no people on the server</p>
-  );
+  const isErrorVisible = isError && !isLoading;
+  const isEmptyMessageVisible = !people.length && !isLoading;
 
   return (
     <>
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {loaderContent}
-          {errorContent}
-          {noPeopleContent}
+          {isLoading && <Loader />}
+          {isErrorVisible && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+          {isEmptyMessageVisible && (
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
+          )}
           {isTableVisible && <PeopleTable people={people} />}
         </div>
       </div>

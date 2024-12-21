@@ -7,6 +7,7 @@ import {
 import { App } from './App';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export const Root = () => (
   <Router>
@@ -18,7 +19,7 @@ export const Root = () => (
           <Route path=":slug?" element={<PeoplePage />} />
         </Route>
 
-        <Route path="*" element={<h1 className="title">Page not found</h1>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </Router>
